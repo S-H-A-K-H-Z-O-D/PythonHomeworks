@@ -198,3 +198,198 @@
 # l = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
 
 # print(l)
+
+# ----------------------Task 21----------------------
+# import math
+
+# x1 = float(input("Enter x1: "))
+# y1 = float(input("Enter y1: "))
+# x2 = float(input("Enter x2: "))
+# y2 = float(input("Enter y2: "))
+# x3 = float(input("Enter x3: "))
+# y3 = float(input("Enter y3: "))
+
+# a = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+# b = math.sqrt((x3 - x2) ** 2 + (y3 - y2) ** 2)
+# c = math.sqrt((x3 - x1) ** 2 + (y3 - y1) ** 2)
+
+# p = (a + b + c) / 2
+
+# S = math.sqrt(p * (p - a) * (p - b) * (p - c))
+
+# print(S)
+
+# ----------------------Task 22----------------------
+# a = float(input("Enter a: "))
+# b = float(input("Enter b: "))
+# c = a + b
+
+# a = c - b
+# b = c - a
+
+# print(a, b)
+
+# ----------------------Task 23----------------------
+# a = float(input("Enter a: "))
+# b = float(input("Enter b: "))
+# c = float(input("Enter b: "))
+
+# d = a + b + c
+
+# a = d - b - c
+# b = d - a - c
+# c = d - a - b
+
+# print(a, b, c)
+
+# ----------------------Task 24----------------------
+# a = float(input("Enter a: "))
+# b = float(input("Enter b: "))
+# c = float(input("Enter b: "))
+
+# d = a + b + c
+
+# a = d - b - c
+# b = d - a - c
+# c = d - a - b
+
+# print(a, b, c)
+
+# ----------------------Task 25----------------------
+# x = float(input("Enter x: "))
+
+# y = 3 * x**6 - 6 * x**2 - 7
+
+# print(y)
+
+# ----------------------Task 26----------------------
+# x = float(input("Enter x: "))
+
+# y = 4 * (x - 3)**6 - 7 * (x - 3)**3 + 2
+
+# print(y)
+
+# ----------------------Task 27 and 28----------------------
+# A = float(input("Enter A: "))
+
+# print(f"A² = {A**2}")
+# print(f"A^3 = {A**3}")
+# print(f"A^4 = {A**4}")
+# print(f"A^5 = {A**5}")
+# print(f"A^8 = {A**8}")
+# print(f"A^10 = {A**10}")
+# print(f"A^15 = {A**15}")
+
+# ----------------------Task 29----------------------
+# import math
+
+# a = float(input("Enter a: "))
+
+# radian = a * math.pi / 180
+
+# print(radian)
+
+# ----------------------Task 30----------------------
+# import math
+
+# a = float(input("Enter a: "))
+
+# gradus = a * 180 / math.pi
+
+# print(gradus)
+
+# ----------------------Task 31----------------------
+# Tf = float(input("Enter Tf: "))
+
+# Tc = (Tf - 32) * 5/9
+
+# print(Tc)
+
+# ----------------------Task 32----------------------
+# Tc = float(input("Enter Tf: "))
+
+# Tf = 9 * Tc / 5 + 32
+
+# print(Tf)
+
+# ----------------------Task 33----------------------
+# X = float(input("Enter X: "))
+# Y = float(input("Enter Y: "))
+# A = float(input("Enter A: "))
+
+# sum = (1 + Y) * A/X
+
+# print(sum)
+
+# ----------------------Task 34----------------------
+# X = float(input("Enter X: "))
+# Y = float(input("Enter Y: "))
+# A = float(input("Enter A: "))
+# B = float(input("Enter B: "))
+
+# diff = A/X - B/Y
+
+# print(diff)
+
+# ----------------------Task 35----------------------
+# V = float(input("Enter V: "))
+# T1 = float(input("Enter T1: "))
+# U = float(input("Enter U: "))
+# T2 = float(input("Enter T2: "))
+
+# S = (V - U) * T1 + (V + U) * T2
+
+# print(S)
+
+# ----------------------Task 36----------------------
+# V1 = float(input("Enter V1: "))
+# V2 = float(input("Enter V2: "))
+# S = float(input("Enter S: "))
+# T = float(input("Enter T: "))
+
+# L = S - (V1 - V2) * T
+
+# print(L)
+
+# ----------------------Task 37----------------------
+# V1 = float(input("Enter V1: "))
+# V2 = float(input("Enter V2: "))
+# S = float(input("Enter S: "))
+# T = float(input("Enter T: "))
+
+# L = S - (V1 + V2) * T
+
+# print(L)
+
+# ----------------------Task 38----------------------
+# A = float(input("Enter A: "))
+# B = float(input("Enter B: "))
+
+# x = -B/A
+
+# print(x)
+
+# ----------------------Task 39----------------------
+# A = float(input("Enter A: "))
+# B = float(input("Enter B: "))
+# C = float(input("Enter C: "))
+
+# D = B**2 -4 * A * C
+# x1 = -B + D**0.5 / 2 * A
+# x2 = -B - D**0.5 / 2 * A
+
+# print(x1, x2)
+
+# ----------------------Task 40----------------------
+# A1 = float(input("Enter A1: "))
+# B1 = float(input("Enter B1: "))
+# C1 = float(input("Enter C1: "))
+# A2 = float(input("Enter A2: "))
+# B2 = float(input("Enter B2: "))
+# C2 = float(input("Enter C2: "))
+
+# D = (A1*B2 - A2*B1)
+# x = (C1*B2 - C2*B1) / D
+# y = (A1*C2 - A2*C1) / D
+
+# print(x, y)
