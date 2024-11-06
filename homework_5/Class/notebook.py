@@ -19,6 +19,7 @@ def options():
     print("     5: DELETE NOTE")
     print("     Q: QUIT THE APPLICATION")
     print("     M: SHOW MENU AGAIN")
+    
     print()
     a = input("Choice: ")
     whichOption(a)
@@ -32,20 +33,31 @@ def showAllNotes():
             copyData.append(el)
 
     print(tabulate(copyData, headers="keys", tablefmt="grid"))
+
     print()
     a = input("Choice: ")
     whichOption(a)
 
 def noteDetail():
-    id = input("Enter a note id: ")
-    print("----------------------------------------")
-    print(f"NOTE {id} DETAILS:")
-    print(f"Note id: {id}")
-    print(f"Note text: {findText(id)}")
 
-    print()
-    a = input("Choice: ")
-    whichOption(a)
+    try:
+        id = input("Enter a note id: ")
+        print("----------------------------------------")
+        print(f"NOTE {id} DETAILS:")
+        print(f"Note id: {id}")
+
+        for el in initData:
+            if el["id"] == int(id):
+                print(f"Note text: {el["Text"]}")
+        
+        print()
+        a = input("Choice: ")
+        whichOption(a)
+
+    except Exception:
+        print("Enter a valid integer!")
+        print()
+        noteDetail()
 
 def addNote():
     note = input("Enter text: ")
@@ -57,6 +69,7 @@ def addNote():
     initData.append({"id": id, "Text": note})
     print("----------------------------------------")
     print(f"NEW NOTE WITH ID {id} CREATED")
+
     print()
     a = input("Choice: ")
     whichOption(a)
@@ -75,6 +88,7 @@ def updateNote():
 
         print("----------------------------------------")
         print(f"NOTE WITH ID {id} UPDATED")
+
         print()
         a = input("Choice: ")
         whichOption(a)
@@ -94,6 +108,7 @@ def deleteNote():
 
         print("----------------------------------------")
         print(f"NOTE WITH ID {id} DELETED")
+
         print()
         a = input("Choice: ")
         whichOption(a)
@@ -106,16 +121,6 @@ def deleteNote():
 
 def quitApp():
     return
-
-def findText(id):
-    try:
-        for el in initData:
-            if el["id"] == int(id):
-                return el["Text"]
-    except Exception:
-        print("Enter a valid integer!")
-        print()
-        noteDetail()
 
 def whichOption(opt):
     match opt:
@@ -134,7 +139,8 @@ def whichOption(opt):
         case "M":
             options()
         case _:
-            print("Enter only one of these options!")
+            print("Enter only one of these options(1, 2, 3, 4, 5, Q, M)!")
+
             print()
             a = input("Choice: ")
             whichOption(a)
