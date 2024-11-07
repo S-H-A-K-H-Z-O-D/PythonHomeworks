@@ -1,19 +1,26 @@
 from tabulate import tabulate
 from datetime import date
 import json
+import os
+import reprlib
 
 class Notebook:
-    def __init__(self):
-        with open("homework_6/notebook/data.json", "r") as file:
+    base_dir = os.path.dirname(__file__)
+    data_file_path = os.path.join(base_dir, "data.json")
+
+    def __init__(self):      
+        if not os.path.exists(self.data_file_path):
+            with open(self.data_file_path, "w") as file:
+                json.dump([], file)
+        
+        with open(self.data_file_path, "r") as file:
             self.notes = json.load(file)
 
     def showAllNotes(self):
         copyData = []
         for el in self.notes:
-            if len(el["Text"]) > 30:
-                copyData.append({"id": el["id"], "Text":f"{el["Text"][:15]}...{el["Text"][-10:]}", "date": el["date"]})
-            else:
-                copyData.append(el)
+            shortened_string = reprlib.repr(el["Text"])
+            copyData.append({"id": el["id"], "Text":shortened_string, "date": el["date"]})
 
         print(tabulate(copyData, headers="keys", tablefmt="grid"))
 
@@ -27,10 +34,10 @@ class Notebook:
                 print(f"Note text: {el["Text"]}")
 
     def addNote(self, note):
-        id = self.notes[-1]["id"] + 1
+        id = 1 if len(self.notes) == 0 else self.notes[-1]["id"] + 1
         current_date = date.today()
         self.notes.append({"id": id, "Text": note, "date": f"{current_date}"})
-        with open("homework_6/notebook/data.json", "w") as file:
+        with open(self.data_file_path, "w") as file:
             json.dump(self.notes, file, indent=4)
 
         print("----------------------------------------")
@@ -40,7 +47,7 @@ class Notebook:
         for el in self.notes:
             if el["id"] == id:
                 el["Text"] = note
-        with open("homework_6/notebook/data.json", "w") as file:
+        with open(self.data_file_path, "w") as file:
             json.dump(self.notes, file, indent=4)
 
         print("----------------------------------------")
@@ -49,8 +56,8 @@ class Notebook:
     def deleteNote(self, id):
         for el in self.notes:
             if el["id"] == id:
-                del self.notes[id - 1]
-        with open("homework_6/notebook/data.json", "w") as file:
+                self.notes.remove(el)
+        with open(self.data_file_path, "w") as file:
             json.dump(self.notes, file, indent=4)
 
         print("----------------------------------------")
@@ -58,9 +65,10 @@ class Notebook:
 
 
 class Terminal:
-
     def __init__(self):
         self.notebook = Notebook()
+
+    def run(self):
         self.options()
 
     def chooseOption(self):
@@ -81,15 +89,9 @@ class Terminal:
         self.chooseOption()
     
     def noteDetail(self):
-        try:
-            id = int(input("Enter a note id: "))
-            self.notebook.noteDetail(id)
-            self.chooseOption()
-
-        except Exception:
-            print("Enter a valid integer!")
-            print()
-            self.noteDetail()
+        id = self.get_id(self.noteDetail)
+        self.notebook.noteDetail(id)
+        self.chooseOption()
 
     def addNote(self):
         note = input("Enter text: ")
@@ -100,33 +102,31 @@ class Terminal:
         self.chooseOption()
 
     def updateNote(self):
-        try:
-            id = int(input("Enter id: "))
-            note = input("Enter new text: ")
-            if len(note.strip()) == 0:
-                self.updateNote()
-            self.notebook.updateNote(id, note)
-
-            self.chooseOption()
-
-        except Exception:
-            print("Enter a valid integer!")
-            print()
+        id = self.get_id(self.updateNote)
+        note = input("Enter new text: ")
+        if len(note.strip()) == 0:
             self.updateNote()
+        self.notebook.updateNote(id, note)
+
+        self.chooseOption()
 
     def deleteNote(self):
+        id = self.get_id(self.deleteNote)
+        self.notebook.deleteNote(id)
+        self.chooseOption()
+
+    def get_id(self, func):
         try:
-            id = int(input("Enter id: "))
-            self.notebook.deleteNote(id)
-            self.chooseOption()
-                    
-        except Exception:
+            id = int(input("Enter a note id: "))
+            return id
+        except ValueError:
             print("Enter a valid integer!")
             print()
-            self.deleteNote()
+            func()
+
 
     def quitApp(self):
-        return
+        exit()
     
     def whichOption(self, opt):
         match opt:
@@ -147,7 +147,7 @@ class Terminal:
                 self.options()
             case _:
                 print("Enter only one of these options(1, 2, 3, 4, 5, Q, M)!")
-
                 self.chooseOption()
 
-Terminal()
+app = Terminal()
+app.run()
